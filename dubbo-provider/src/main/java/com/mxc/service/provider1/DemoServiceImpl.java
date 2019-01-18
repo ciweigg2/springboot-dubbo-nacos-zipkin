@@ -17,12 +17,12 @@
 package com.mxc.service.provider1;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.mxc.service.DemoService;
 import com.mxc.service.UserService;
-import com.mxc.service.provider1.sentinel.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -44,7 +44,10 @@ public class DemoServiceImpl implements DemoService {
     private String serviceName;
 
     @Override
-    @SentinelResource(value = "TestResource", blockHandler = "handleException", blockHandlerClass = {ExceptionUtil.class})
+//    @SentinelResource(value = "FlowRuleA",blockHandler = "exceptionHandler")
+    // 对应的 `handleException` 函数需要位于 `ExceptionUtil` 类中，并且必须为 static 函数.
+    @SentinelResource(value = "DegradeRuleA", blockHandler = "exceptionHandler", fallback = "helloFallback")
+//    @SentinelResource(value = "FlowRuleA", blockHandler = "handleException", blockHandlerClass = {ExceptionUtil.class})
     public String sayHello(String name) {
         userService.sayName();
         System.out.println(userService.sayName());
@@ -57,4 +60,15 @@ public class DemoServiceImpl implements DemoService {
                 name));
         return String.format("[%s] : Hello, %s", serviceName, name);
     }
+
+    // Fallback 函数，函数签名与原函数一致 fallback只有降级的时候才会触发 业务异常不会进入 fallback 逻辑
+    public String helloFallback(String name) {
+        return String.format("Halooooo %s", name);
+    }
+
+    // Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
+    public String exceptionHandler(String name, BlockException ex) {
+        return "不好意思当前太挤啦，Oops, error occurred at " + name;
+    }
+
 }
