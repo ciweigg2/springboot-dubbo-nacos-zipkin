@@ -18,11 +18,11 @@ package com.mxc.service.provider1.sentinel;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 
 /**
- * @author Eric Zhao
+ * @author 马秀成
  */
-public final class ExceptionUtil {
+public class ExceptionUtil {
 
-    public static void handleException(BlockException ex) {
-        System.out.println("Oops: " + ex.getClass().getCanonicalName());
+    public static String handleException(String name ,BlockException ex) {
+        return "Oops: " + ex.getClass().getCanonicalName();
     }
 }
