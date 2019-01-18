@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: dubbo-registry-nacos-consumer-sample
+
+demo:
+  service:
+    version: 1.0.0
+
+dubbo:
+  registry:
+    address: nacos://118.184.218.184:8848
+  # 提供者需要配置扫描接口
+#  scan:
+#    base-packages: com.mxc.web.impl
+#  protocol:
+#    port: -1
+  # 消费者默认不检测是否有服务注册
+  consumer:
+    check: false
+    filter: tracing
+
+# nacos配置中心
+nacos:
+  config:
+    server-addr: 118.184.218.184:8848
+    # 命名空间的id
+    namespace: 7d32a129-a6ca-4ba1-a75e-96aaed89da33
