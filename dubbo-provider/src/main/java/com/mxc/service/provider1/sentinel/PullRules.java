@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Component
 @Slf4j
-public class Pull {
+public class PullRules {
 
     final String remoteAddress = "118.184.218.184:8848";
     final String groupId = "Sentinel:Demo";
