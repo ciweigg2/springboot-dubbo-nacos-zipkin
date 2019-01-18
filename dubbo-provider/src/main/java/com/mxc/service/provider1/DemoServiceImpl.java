@@ -16,11 +16,13 @@
  */
 package com.mxc.service.provider1;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.mxc.service.DemoService;
 import com.mxc.service.UserService;
+import com.mxc.service.provider1.sentinel.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
@@ -42,6 +44,7 @@ public class DemoServiceImpl implements DemoService {
     private String serviceName;
 
     @Override
+    @SentinelResource(value = "TestResource", blockHandler = "handleException", blockHandlerClass = {ExceptionUtil.class})
     public String sayHello(String name) {
         userService.sayName();
         System.out.println(userService.sayName());

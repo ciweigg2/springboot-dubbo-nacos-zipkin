@@ -19,6 +19,7 @@ package com.mxc.service.provider1.bootstrap;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -27,6 +28,7 @@ import org.springframework.context.annotation.ImportResource;
  * @since 1.0.0
  */
 @EnableAutoConfiguration
+@ComponentScan(value = "com.mxc.service.provider1")
 @ImportResource(value = "/dubbo-zipkin-provider1.xml")
 public class DubboRegistryNacosProvider1Bootstrap {
 
