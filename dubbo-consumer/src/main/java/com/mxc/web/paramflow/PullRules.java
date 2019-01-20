@@ -37,9 +37,9 @@ public class PullRules {
      */
     @PostConstruct
     public void loadRules() {
-        loadFlowRule();
-        loadDegradeRule();
-        loadSystemRule();
+//        loadFlowRule();
+//        loadDegradeRule();
+//        loadSystemRule();
         loadParamFlowRule();
     }
 
