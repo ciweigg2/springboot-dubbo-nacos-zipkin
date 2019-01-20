@@ -1,4 +1,4 @@
-package com.mxc.service.provider1.sentinel;
+package com.mxc.web.paramflow;
 
 import com.alibaba.csp.sentinel.datasource.ReadableDataSource;
 import com.alibaba.csp.sentinel.datasource.nacos.NacosDataSource;

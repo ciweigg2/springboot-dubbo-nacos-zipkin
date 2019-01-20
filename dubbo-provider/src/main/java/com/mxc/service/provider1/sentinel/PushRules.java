@@ -24,6 +24,7 @@ public class PushRules {
 		setFlowRule();
 		setDegradeRule();
 		setSystemRule();
+		setParamFlowRule();
 	}
 
 	/**
@@ -101,5 +102,28 @@ public class PushRules {
 		log.info(String.valueOf(configService.publishConfig(dataId, groupId, rule)));
 	}
 
+	/**
+	 * 添加热点配置参数
+	 */
+	public static void setParamFlowRule() throws Exception {
+		final String remoteAddress = "118.184.218.184:8848";
+		final String groupId = "Sentinel:Demo";
+		final String dataId = "com.alibaba.csp.sentinel.demo.param.rule";
+		final String rule = "[{\n" +
+				"\t\"clusterMode\": false,\n" +
+				"\t\"count\": 5.0,\n" +
+				"\t\"grade\": 1,\n" +
+				"\t\"limitApp\": \"default\",\n" +
+				"\t\"paramFlowItemList\": [{\n" +
+				"\t\t\"classType\": \"int\",\n" +
+				"\t\t\"count\": 10,\n" +
+				"\t\t\"object\": \"2\"\n" +
+				"\t}],\n" +
+				"\t\"paramIdx\": 0,\n" +
+				"\t\"resource\": \"ParamFlowA\"\n" +
+				"}]";
+		ConfigService configService = NacosFactory.createConfigService(remoteAddress);
+		log.info(String.valueOf(configService.publishConfig(dataId, groupId, rule)));
+	}
 
 }
