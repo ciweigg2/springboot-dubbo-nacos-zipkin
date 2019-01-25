@@ -179,6 +179,29 @@
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>2.1.2.RELEASE</version>
             </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.40</version>
+            </dependency>
+            <!--fescar分布式事务-->
+            <dependency>
+                <groupId>com.alibaba.fescar</groupId>
+                <artifactId>fescar-spring</artifactId>
+                <version>0.1.2-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fescar</groupId>
+                <artifactId>fescar-dubbo</artifactId>
+                <version>0.1.2-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.1.10</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

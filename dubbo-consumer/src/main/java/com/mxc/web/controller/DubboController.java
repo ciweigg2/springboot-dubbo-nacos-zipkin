@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.nacos.api.config.annotation.NacosConfigListener;
 import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.mxc.service.DemoService;
+import com.mxc.service.UserService;
 import com.mxc.web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,9 @@ public class DubboController {
     @Reference(version = "${demo.service.version}")
     private DemoService demoService;
 
+    @Reference(version = "${demo.service.version}")
+    private UserService userService;
+
     @NacosValue(value = "${name:unknown}" ,autoRefreshed = true)
     private String name;
 
@@ -25,6 +29,14 @@ public class DubboController {
     public String dubboSayHello(){
         System.out.println(name);
         return demoService.sayHello("sayHello");
+    }
+
+    /**
+     * 测试分布式事务
+     */
+    @RequestMapping(value = "/addDemo")
+    public void addUser() {
+        demoService.addDemo();
     }
 
     //监听nacos配置文件的变化

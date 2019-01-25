@@ -28,7 +28,7 @@ import static org.springframework.core.env.StandardEnvironment.SYSTEM_PROPERTIES
  * Dubbo Registry Nacos Consumer Bootstrap
  */
 //@EnableAutoConfiguration
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.mxc.*"})
 @NacosPropertySource(
         name = "custom",
         dataId = "nacos_config",

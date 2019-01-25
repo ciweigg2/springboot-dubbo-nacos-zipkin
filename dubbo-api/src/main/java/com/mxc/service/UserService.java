@@ -4,4 +4,6 @@ public interface UserService {
 
     String sayName();
 
+    void addUser();
+
 }

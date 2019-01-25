@@ -21,9 +21,16 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.RpcContext;
+import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 import com.mxc.service.DemoService;
 import com.mxc.service.UserService;
+import com.mxc.service.exception.ServiceException;
+import com.mxc.service.provider1.mapper.StorageTblMapper;
+import com.mxc.service.provider1.model.StorageTbl;
+import com.mxc.service.status.EnumBaseError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Default {@link DemoService}
@@ -32,10 +39,14 @@ import org.springframework.beans.factory.annotation.Value;
  * @since 1.0.0
  */
 @Service(version = "${demo.service.version}")
+@Transactional(rollbackFor = Exception.class)
 public class DemoServiceImpl implements DemoService {
 
     @Reference(version = "${demo.service.version}")
     private UserService userService;
+
+    @Autowired
+    private StorageTblMapper storageTblMapper;
 
     /**
      * The default value of ${dubbo.application.name} is ${spring.application.name}
@@ -59,6 +70,18 @@ public class DemoServiceImpl implements DemoService {
                 name,
                 name));
         return String.format("[%s] : Hello, %s", serviceName, name);
+    }
+
+    @Override
+    @GlobalTransactional(name = "DemoService.addDemo", timeoutMills = 60000)
+    public void addDemo() {
+        StorageTbl storageTbl = new StorageTbl();
+        storageTbl.setCommodityCode(String.valueOf(System.currentTimeMillis()));
+        storageTbl.setCount(2);
+        storageTblMapper.insert(storageTbl);
+        userService.addUser();
+        throw new ServiceException(EnumBaseError.MISSING_PARAMETERS);
+//        throw new RuntimeException("asd");
     }
 
     // Fallback 函数，函数签名与原函数一致 fallback只有降级的时候才会触发 业务异常不会进入 fallback 逻辑

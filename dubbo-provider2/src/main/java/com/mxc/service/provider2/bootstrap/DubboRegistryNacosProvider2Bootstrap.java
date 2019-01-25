@@ -16,9 +16,13 @@
  */
 package com.mxc.service.provider2.bootstrap;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -26,8 +30,12 @@ import org.springframework.context.annotation.ImportResource;
  *
  * @since 1.0.0
  */
-@EnableAutoConfiguration
+@SpringBootApplication(scanBasePackages = {"com.mxc.*"})
+//@ComponentScan(value = "com.mxc.service.provider2")
+//@EnableAutoConfiguration
 @ImportResource(value = "/dubbo-zipkin-provider2.xml")
+@MapperScan(basePackages = {"com.mxc.service.provider2.mapper"})
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class DubboRegistryNacosProvider2Bootstrap {
 
     public static void main(String[] args) {
