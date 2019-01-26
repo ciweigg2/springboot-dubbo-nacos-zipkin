@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>dubbo-provider</module>
+        <module>dubbo-common</module>
         <module>dubbo-api</module>
         <module>dubbo-consumer</module>
         <module>dubbo-provider2</module>
@@ -64,6 +65,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo-dependencies-bom</artifactId>
                 <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>dubbo-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <!-- Dubbo -->

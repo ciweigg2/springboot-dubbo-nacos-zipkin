@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mxc.service.provider1.mapper.StorageTblMapper">
-  <resultMap id="BaseResultMap" type="com.mxc.service.provider1.model.StorageTbl">
+<mapper namespace="com.mxc.dubbo.mapper.StorageTblMapper">
+  <resultMap id="BaseResultMap" type="com.mxc.dubbo.model.StorageTbl">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode" />
     <result column="count" jdbcType="INTEGER" property="count" />
@@ -67,7 +67,7 @@
   <sql id="Base_Column_List">
     id, commodity_code, `count`
   </sql>
-  <select id="selectByExample" parameterType="com.mxc.service.provider1.model.StorageTblExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.mxc.dubbo.model.StorageTblExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -102,17 +102,17 @@
     delete from storage_tbl
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mxc.service.provider1.model.StorageTblExample">
+  <delete id="deleteByExample" parameterType="com.mxc.dubbo.model.StorageTblExample">
     delete from storage_tbl
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mxc.service.provider1.model.StorageTbl" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mxc.dubbo.model.StorageTbl" useGeneratedKeys="true">
     insert into storage_tbl (commodity_code, `count`)
     values (#{commodityCode,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mxc.service.provider1.model.StorageTbl" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mxc.dubbo.model.StorageTbl" useGeneratedKeys="true">
     insert into storage_tbl
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="commodityCode != null">
@@ -131,7 +131,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mxc.service.provider1.model.StorageTblExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.mxc.dubbo.model.StorageTblExample" resultType="java.lang.Long">
     select count(*) from storage_tbl
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -163,7 +163,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mxc.service.provider1.model.StorageTbl">
+  <update id="updateByPrimaryKeySelective" parameterType="com.mxc.dubbo.model.StorageTbl">
     update storage_tbl
     <set>
       <if test="commodityCode != null">
@@ -175,7 +175,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mxc.service.provider1.model.StorageTbl">
+  <update id="updateByPrimaryKey" parameterType="com.mxc.dubbo.model.StorageTbl">
     update storage_tbl
     set commodity_code = #{commodityCode,jdbcType=VARCHAR},
       `count` = #{count,jdbcType=INTEGER}
